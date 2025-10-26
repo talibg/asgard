@@ -34,13 +34,15 @@ export default function TsEditor({ value, onChange, tsx = false }: Props) {
     const handleChange = useCallback((v: string) => onChange(v), [onChange])
 
     return (
-        <CodeMirror
-            basicSetup={{ lineNumbers: true }}
-            extensions={extensions}
-            height="60vh"
-            onChange={handleChange}
-            theme={isDark ? oneDark : 'light'}
-            value={value}
-        />
+        <div className="h-full">
+            <CodeMirror
+                basicSetup={{ lineNumbers: true }}
+                extensions={extensions}
+                height="100%"
+                onChange={handleChange}
+                theme={isDark ? oneDark : 'light'}
+                value={value}
+            />
+        </div>
     )
 }

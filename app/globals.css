@@ -216,4 +216,9 @@
             "liga" 1;
         font-variant-ligatures: contextual;
     }
+    /* Make CodeMirror fill its container */
+    .cm-theme,
+    .cm-editor {
+        height: 100% !important;
+    }
 }
