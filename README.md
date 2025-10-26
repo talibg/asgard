@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+TypeSnip (asgard)
+=================
 
-## Getting Started
+TypeSnip is a private, local TypeScript snippet manager that runs entirely in your browser. No accounts, no servers, no tracking — your snippets live in your device’s IndexedDB.
 
-First, run the development server:
+- Website: https://typesnip.com
+- App name: TypeSnip
+- Repo name: asgard
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Why TypeSnip
+- Offline‑first: works with no internet.
+- Private by design: nothing is uploaded or shared.
+- Instant: quick search, edit, and copy.
+- Persistent: stored in the browser until you delete them.
+- Installable: PWA for desktop/home screen.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Features
+- Snippet CRUD with title, tags, and TS/TSX code
+- Fast search and sort (date/name)
+- CodeMirror editor with One Dark in dark mode
+- Keyboard shortcuts: search (Cmd/Ctrl+K), new (Cmd/Ctrl+Alt+N), save (Cmd/Ctrl+S)
+- Export/Import JSON; delete database from Settings
+- Light/Dark themes via next-themes
+- Shadcn UI components, Tailwind v4 (zero-config)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Local‑only Architecture
+- Data store: IndexedDB (via `idb`) under a single object store (`snippets`).
+- No servers or accounts; removing site data or uninstalling the PWA erases snippets.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Tech Stack
+- Next.js App Router (Next 16), React, TypeScript (strict)
+- Tailwind CSS v4, shadcn/ui
+- next-themes, sonner, CodeMirror 6
+- Biome for formatting/linting
 
-## Learn More
+Conventions
+- Filenames: all `.ts`/`.tsx` files use kebab-case (e.g., `snippet-editor.tsx`).
+- Imports: always use the alias form `@/path/to/file` (no relative imports).
 
-To learn more about Next.js, take a look at the following resources:
+Project Structure
+- `app/` — routes, root layout, pages
+- `components/` — app components (kebab-case), UI primitives in `components/ui/`
+- `lib/` — data access (`lib/idb.ts`)
+- `public/` — PWA assets (`manifest.webmanifest`, `sw.js`)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Development
+1) Install deps
+- `pnpm install`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2) Run dev server
+- `pnpm dev` → http://localhost:3000
 
-## Deploy on Vercel
+3) Build & start
+- `pnpm build`
+- `pnpm start`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4) Type checks & lint
+- TypeScript: `pnpm exec tsc --noEmit`
+- Lint (Biome): `pnpm lint`
+  - In some environments, Biome’s wrapper can fail. As a workaround, call the platform binary directly:
+    `node_modules/.pnpm/@biomejs+cli-linux-x64@*/node_modules/@biomejs/cli-linux-x64/biome check --write`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+PWA Notes
+- Service worker: `public/sw.js` (registered in the client provider). Enabled in production builds.
+- Manifest: `public/manifest.webmanifest` (installable on desktop/mobile).
+
+Contributing
+- Issues and discussions welcome. Please follow the filename/import conventions above.
+
+Security & Privacy
+- TypeSnip never transmits your snippets. Everything stays on your device unless you export JSON yourself.
+
+Links
+- Website: https://typesnip.com
+- Terms: https://typesnip.com/terms
+- About: https://typesnip.com/about

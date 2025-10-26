@@ -1,0 +1,96 @@
+{
+    "$schema": "https://biomejs.dev/schemas/2.3.0/schema.json",
+    "root": true,
+    "vcs": {
+        "enabled": true,
+        "clientKind": "git",
+        "useIgnoreFile": true,
+        "root": ".",
+        "defaultBranch": "main"
+    },
+    "files": {
+        "ignoreUnknown": true,
+        "includes": ["**", "!node_modules", "!.next", "!dist", "!build", "!!**/app/globals.css"]
+    },
+    "formatter": {
+        "enabled": true,
+        "formatWithErrors": true,
+        "indentStyle": "space",
+        "indentWidth": 4,
+        "lineWidth": 120
+    },
+    "linter": {
+        "enabled": true,
+        "domains": {
+            "next": "all",
+            "react": "all"
+        },
+        "rules": {
+            "recommended": true,
+            "suspicious": {
+                "noExplicitAny": "error",
+                "noUnknownAtRules": "off"
+            },
+            "complexity": {
+                "noForEach": "error"
+            },
+            "style": {
+                "useConst": "error",
+                "useBlockStatements": "off",
+                "noNonNullAssertion": "error"
+            },
+            "a11y": {
+                "noAutofocus": "error",
+                "noDistractingElements": "error",
+                "useAltText": "error",
+                "useHtmlLang": "error"
+            },
+            "performance": {
+                "noDelete": "error"
+            }
+        }
+    },
+    "assist": {
+        "enabled": true,
+        "actions": {
+            "source": {
+                "organizeImports": "on",
+                "useSortedAttributes": "on",
+                "useSortedProperties": "on"
+            }
+        }
+    },
+    "javascript": {
+        "formatter": {
+            "quoteStyle": "single",
+            "jsxQuoteStyle": "double",
+            "semicolons": "asNeeded"
+        }
+    },
+    "css": {
+        "parser": {
+            "cssModules": true
+        },
+        "formatter": {
+            "enabled": true,
+            "indentStyle": "space",
+            "indentWidth": 4,
+            "lineEnding": "lf",
+            "lineWidth": 80,
+            "quoteStyle": "double"
+        },
+        "linter": {
+            "enabled": true
+        },
+        "assist": {
+            "enabled": true
+        }
+    },
+    "overrides": [
+        {
+            "includes": ["app/globals.css"],
+            "linter": { "enabled": false },
+            "formatter": { "enabled": false }
+        }
+    ]
+}
