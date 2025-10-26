@@ -176,7 +176,7 @@ export default function SnippetClient() {
     }
 
     return (
-        <div className="grid grid-cols-[320px_1fr] gap-4 h-full min-h-0">
+        <div className="grid grid-cols-1 md:grid-cols-[320px_1fr] gap-4 h-full min-h-0">
             <aside className="flex flex-col border rounded min-h-0">
                 <div className="p-3">
                     <div className="relative">
