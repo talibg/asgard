@@ -5,6 +5,7 @@ import AppHeader from '@/components/app-header'
 import SwProvider from '@/components/sw-provider'
 import { ThemeProvider } from '@/components/theme-provider'
 import '@/app/globals.css'
+import { Analytics } from '@vercel/analytics/next'
 import { Fira_Code, Fira_Sans } from 'next/font/google'
 import { Toaster } from '@/components/ui/sonner'
 
@@ -41,6 +42,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                         <Toaster position="top-center" richColors />
                     </SwProvider>
                 </ThemeProvider>
+                <Analytics />
             </body>
         </html>
     )
