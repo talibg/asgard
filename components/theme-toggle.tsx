@@ -10,19 +10,20 @@ export default function ThemeToggle() {
     const [mounted, setMounted] = useState(false)
     useEffect(() => setMounted(true), [])
 
-    const lightVariant = mounted && resolvedTheme === 'light' ? 'default' : 'outline'
-    const darkVariant = mounted && resolvedTheme === 'dark' ? 'default' : 'outline'
+    const isDark = mounted && resolvedTheme === 'dark'
+    const icon = isDark ? <Sun className="size-4" /> : <Moon className="size-4" />
+    const next = isDark ? 'light' : 'dark'
 
     return (
-        <div className="inline-flex items-center gap-2">
-            <Button aria-label="Use light theme" onClick={() => setTheme('light')} size="sm" variant={lightVariant}>
-                <Sun className="size-4" />
-                Light
-            </Button>
-            <Button aria-label="Use dark theme" onClick={() => setTheme('dark')} size="sm" variant={darkVariant}>
-                <Moon className="size-4" />
-                Dark
-            </Button>
-        </div>
+        <Button
+            aria-label="Toggle theme"
+            onClick={() => setTheme(next)}
+            size="icon"
+            title="Toggle theme"
+            type="button"
+            variant="outline"
+        >
+            {icon}
+        </Button>
     )
 }
