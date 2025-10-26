@@ -1,6 +1,7 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Check, Copy } from 'lucide-react'
 import { useCallback, useEffect, useState } from 'react'
 import { Controller, type FieldErrors, type Resolver, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
@@ -12,9 +13,8 @@ import { Kbd, KbdGroup } from '@/components/ui/kbd'
 import { Label } from '@/components/ui/label'
 import { Switch } from '@/components/ui/switch'
 import TagInput from '@/components/ui/tag-input'
-import type { Snippet } from '@/lib/idb'
-import { Snippets } from '@/lib/idb'
-import { Check, Copy } from 'lucide-react'
+import type { Snippet } from '@/lib/snippets-store'
+import { Snippets } from '@/lib/snippets-store'
 
 type Props = {
     initial: Snippet
@@ -141,7 +141,7 @@ export default function SnippetEditor({ initial, onSaved }: Props) {
                                                 document.body.removeChild(ta)
                                                 setCopied(true)
                                                 toast.success('Code copied to clipboard')
-                                            } catch (err) {
+                                            } catch (_err) {
                                                 toast.error('Failed to copy code')
                                             }
                                         }

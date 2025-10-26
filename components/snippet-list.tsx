@@ -14,7 +14,7 @@ import {
 } from '@/components/ui/alert-dialog'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import type { Snippet } from '@/lib/idb'
+import type { Snippet } from '@/lib/snippets-store'
 import { cn } from '@/lib/utils'
 
 type Props = {

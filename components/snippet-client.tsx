@@ -4,17 +4,17 @@ import { ArrowDown10, ArrowDownAZ, ArrowUp10, ArrowUpAZ, Plus, SearchIcon } from
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { toast } from 'sonner'
+import NewSnippetButton from '@/components/new-snippet-button'
 import SnippetEditor from '@/components/snippet-editor'
 import SnippetList from '@/components/snippet-list'
 import { Button } from '@/components/ui/button'
-import NewSnippetButton from '@/components/new-snippet-button'
 import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '@/components/ui/empty'
 import { Input } from '@/components/ui/input'
 import { Kbd, KbdGroup } from '@/components/ui/kbd'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Separator } from '@/components/ui/separator'
-import { onChange, type Snippet, Snippets } from '@/lib/idb'
+import { onChange, type Snippet, Snippets } from '@/lib/snippets-store'
 
 const uuid = () => crypto.randomUUID()
 
@@ -61,7 +61,7 @@ export default function SnippetClient() {
 
     const load = useCallback(async () => {
         const qq = q.trim()
-        const data = qq ? await Snippets.searchByTitle(qq) : await Snippets.listAll()
+        const data = qq ? await Snippets.search(qq) : await Snippets.listAll()
         setItems(sortItems(data))
     }, [q, sortItems])
 

@@ -16,7 +16,7 @@ import {
     AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
 import { Button } from '@/components/ui/button'
-import { type Snippet, Snippets } from '@/lib/idb'
+import { type Snippet, Snippets } from '@/lib/snippets-store'
 
 export default function SettingsPage() {
     const fileRef = useRef<HTMLInputElement | null>(null)

@@ -12,7 +12,12 @@ type Props = {
     className?: string
 }
 
-export default function NewSnippetButton({ label = 'New Snippet', showShortcut = true, size = 'sm', className }: Props) {
+export default function NewSnippetButton({
+    label = 'New Snippet',
+    showShortcut = true,
+    size = 'sm',
+    className,
+}: Props) {
     const [isMac, setIsMac] = useState(false)
     useEffect(() => {
         const mac = typeof navigator !== 'undefined' && /Mac|iPhone|iPod|iPad/i.test(navigator.platform)
