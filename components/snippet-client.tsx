@@ -28,8 +28,16 @@ export default function SnippetClient() {
     const [isMac, setIsMac] = useState<boolean>(false)
     const [sortKey, setSortKey] = useState<'updatedAt' | 'title'>('updatedAt')
     const [sortDir, setSortDir] = useState<'asc' | 'desc'>('desc')
-    const [hasInteracted, setHasInteracted] = useState(false)
-    const hadInitialParams = (searchParams?.toString() || '').length > 0
+    const [_hasInteracted, setHasInteracted] = useState(false)
+    // Track if user interacted so we can preserve selection behavior
+    const _hadInitialParams = useMemo(() => {
+        try {
+            if (!searchParams) return false
+            return Array.from(searchParams.entries()).length > 0
+        } catch {
+            return false
+        }
+    }, [searchParams])
 
     const sortItems = useCallback(
         (arr: Snippet[]): Snippet[] => {
@@ -51,7 +59,8 @@ export default function SnippetClient() {
     )
 
     const load = useCallback(async () => {
-        const data = q ? await Snippets.searchByTitle(q) : await Snippets.listAll()
+        const qq = q.trim()
+        const data = qq ? await Snippets.searchByTitle(qq) : await Snippets.listAll()
         setItems(sortItems(data))
     }, [q, sortItems])
 
@@ -73,8 +82,8 @@ export default function SnippetClient() {
         toast.success('Snippet created')
     }, [load])
 
+    // Initialize from URL once on mount
     useEffect(() => {
-        // Initialize from URL params
         const spQ = searchParams?.get('q') ?? ''
         const spSort = (searchParams?.get('sort') as 'updatedAt' | 'title') ?? 'updatedAt'
         const spDir = (searchParams?.get('dir') as 'asc' | 'desc') ?? 'desc'
@@ -83,15 +92,22 @@ export default function SnippetClient() {
         setSortKey(spSort)
         setSortDir(spDir)
         setSelectedId(spId)
+        // do not call load() here; debounced effect will fire with latest state
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [searchParams?.get])
 
-        load()
-        onChange(() => load())
+    // Subscribe to cross-tab changes and create-snippet events
+    useEffect(() => {
+        const unsub = onChange(() => void load())
         const onCreate = () => {
             void createEmpty()
         }
         window.addEventListener('create-snippet', onCreate as EventListener)
-        return () => window.removeEventListener('create-snippet', onCreate as EventListener)
-    }, [createEmpty, load, searchParams])
+        return () => {
+            window.removeEventListener('create-snippet', onCreate as EventListener)
+            unsub?.()
+        }
+    }, [createEmpty, load])
 
     useEffect(() => {
         // Detect platform for showing ⌘ vs Ctrl
@@ -111,8 +127,6 @@ export default function SnippetClient() {
 
     // Push state to URL so it can be shared/bookmarked
     const syncUrl = useCallback(() => {
-        // Only push if user has interacted or there were initial params.
-        if (!(hasInteracted || hadInitialParams)) return
         const params = new URLSearchParams()
         if (q) params.set('q', q)
         if (sortKey !== 'updatedAt') params.set('sort', sortKey)
@@ -120,7 +134,7 @@ export default function SnippetClient() {
         if (selectedId) params.set('id', selectedId)
         const query = params.toString()
         router.replace(query ? `${pathname}?${query}` : pathname)
-    }, [q, sortKey, sortDir, selectedId, router, pathname, hasInteracted, hadInitialParams])
+    }, [q, sortKey, sortDir, selectedId, router, pathname])
 
     useEffect(() => {
         const t = setTimeout(syncUrl, 200)

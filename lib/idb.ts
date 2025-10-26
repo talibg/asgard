@@ -31,7 +31,17 @@ const getDb = () => {
 
 const bc = typeof BroadcastChannel !== 'undefined' ? new BroadcastChannel('snippets') : undefined
 const ping = () => bc?.postMessage({ t: 'changed' })
-export const onChange = (fn: () => void) => bc?.addEventListener('message', (m) => m.data?.t === 'changed' && fn())
+// Subscribe to cross-tab changes; returns an unsubscribe for cleanup
+export const onChange = (fn: () => void): (() => void) | undefined => {
+    if (!bc) return undefined
+    const handler = (m: MessageEvent) => {
+        // Only react to our change notifications
+        const changed = typeof m.data === 'object' && m.data !== null && (m.data as { t?: unknown }).t === 'changed'
+        if (changed) fn()
+    }
+    bc.addEventListener('message', handler)
+    return () => bc.removeEventListener('message', handler)
+}
 
 export const Snippets = {
     listAll: async (): Promise<Snippet[]> => {
@@ -58,9 +68,10 @@ export const Snippets = {
     },
     // Full-text-ish search across title, tags, and code
     searchByTitle: async (q: string): Promise<Snippet[]> => {
-        if (!q) return Snippets.listAll()
+        const query = q.trim()
+        if (!query) return Snippets.listAll()
         const db = await getDb()
-        const lower = q.toLowerCase()
+        const lower = query.toLowerCase()
         const rows = (await db.getAll('snippets')) as Snippet[]
         return rows
             .filter((r) => {
