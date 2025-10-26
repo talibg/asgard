@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 export default function TermsPage() {
     return (
         <main className="p-6 flex-1 space-y-6">
@@ -79,7 +81,8 @@ export default function TermsPage() {
                 <h2 className="text-base font-medium">9. Changes to these terms</h2>
                 <p className="text-sm text-muted-foreground">
                     We may update these Terms from time to time. Continued use after updates constitutes acceptance of
-                    the revised terms. The current version will always be available at https://typesnip.com/terms.
+                    the revised terms. The current version will always be available at{' '}
+                    <Link href="/terms">https://typesnip.com/terms</Link>.
                 </p>
             </section>
 
@@ -87,7 +90,7 @@ export default function TermsPage() {
                 <h2 className="text-base font-medium">10. Contact</h2>
                 <p className="text-sm text-muted-foreground">
                     For questions about these Terms or the app in general, contact the maintainers via
-                    typesnip.com/contact or open an issue on our GitHub repository.
+                    <a href="https://talibg.com">talibg.com</a> or open an issue on our GitHub repository.
                 </p>
             </section>
 
