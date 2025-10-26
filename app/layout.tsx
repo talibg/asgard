@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import AdPlaceholder from '@/components/ad-placeholder'
+//import AdPlaceholder from '@/components/ad-placeholder'
 import AppFooter from '@/components/app-footer'
 import AppHeader from '@/components/app-header'
 import SwProvider from '@/components/sw-provider'
@@ -36,7 +36,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <ThemeProvider attribute="class" defaultTheme="system" disableTransitionOnChange enableSystem>
                     <SwProvider>
                         <AppHeader />
-                        <AdPlaceholder />
+                        {/*<AdPlaceholder />*/}
                         {children}
                         <AppFooter />
                         <Toaster position="top-center" richColors />
