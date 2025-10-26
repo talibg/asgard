@@ -4,7 +4,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 
 export default function Page() {
     return (
-        <main className="flex-1 px-3 pb-3 overflow-hidden">
+        <main className="flex-1 p-3 overflow-hidden">
             <Suspense
                 fallback={
                     <div className="grid grid-cols-[320px_1fr] gap-4 h-full min-h-0">

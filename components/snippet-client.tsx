@@ -7,6 +7,7 @@ import { toast } from 'sonner'
 import SnippetEditor from '@/components/snippet-editor'
 import SnippetList from '@/components/snippet-list'
 import { Button } from '@/components/ui/button'
+import NewSnippetButton from '@/components/new-snippet-button'
 import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '@/components/ui/empty'
 import { Input } from '@/components/ui/input'
 import { Kbd, KbdGroup } from '@/components/ui/kbd'
@@ -291,9 +292,7 @@ export default function SnippetClient() {
                             <EmptyDescription>Select an item from the list or create a new one.</EmptyDescription>
                         </EmptyHeader>
                         <EmptyContent>
-                            <Button onClick={() => window.dispatchEvent(new CustomEvent('create-snippet'))}>
-                                New Snippet
-                            </Button>
+                            <NewSnippetButton label="Snippet" showShortcut size="sm" />
                         </EmptyContent>
                     </Empty>
                 )}

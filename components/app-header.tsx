@@ -10,7 +10,7 @@ export default function AppHeader() {
                 <Braces className="pr-3" /> TypeSnip
             </Link>
             <div className="flex items-center gap-2">
-                <NewSnippetButton />
+                <NewSnippetButton label="Snippet" />
                 <ThemeToggle />
             </div>
         </header>

@@ -14,6 +14,7 @@ import { Switch } from '@/components/ui/switch'
 import TagInput from '@/components/ui/tag-input'
 import type { Snippet } from '@/lib/idb'
 import { Snippets } from '@/lib/idb'
+import { Check, Copy } from 'lucide-react'
 
 type Props = {
     initial: Snippet
@@ -33,6 +34,7 @@ export default function SnippetEditor({ initial, onSaved }: Props) {
     const isNew = initial.createdAt === initial.updatedAt
     const [saving, setSaving] = useState(false)
     const [isMac, setIsMac] = useState(false)
+    const [copied, setCopied] = useState(false)
 
     const { control, register, handleSubmit, watch, reset, formState } = useForm<FormValues>({
         resolver: zodResolver(formSchema) as unknown as Resolver<FormValues>,
@@ -111,12 +113,49 @@ export default function SnippetEditor({ initial, onSaved }: Props) {
                     />
                 </Label>
             </div>
-            <div className="flex-1 min-h-0">
+            <div className="flex-1 min-h-0 relative">
                 <Controller
                     control={control}
                     name="code"
                     render={({ field: { value, onChange } }) => (
-                        <TsEditor onChange={onChange} tsx={language === 'tsx'} value={value} />
+                        <>
+                            <TsEditor onChange={onChange} tsx={language === 'tsx'} value={value} />
+                            <div className="absolute right-2 top-2 z-10">
+                                <Button
+                                    aria-label="Copy code"
+                                    className="shadow-xs"
+                                    onClick={async () => {
+                                        try {
+                                            await navigator.clipboard.writeText(value)
+                                            setCopied(true)
+                                            toast.success('Code copied to clipboard')
+                                        } catch {
+                                            try {
+                                                const ta = document.createElement('textarea')
+                                                ta.value = value
+                                                ta.style.position = 'fixed'
+                                                ta.style.opacity = '0'
+                                                document.body.appendChild(ta)
+                                                ta.select()
+                                                document.execCommand('copy')
+                                                document.body.removeChild(ta)
+                                                setCopied(true)
+                                                toast.success('Code copied to clipboard')
+                                            } catch (err) {
+                                                toast.error('Failed to copy code')
+                                            }
+                                        }
+                                        window.setTimeout(() => setCopied(false), 1500)
+                                    }}
+                                    size="icon"
+                                    title="Copy code"
+                                    type="button"
+                                    variant="outline"
+                                >
+                                    {copied ? <Check className="size-4" /> : <Copy className="size-4" />}
+                                </Button>
+                            </div>
+                        </>
                     )}
                 />
             </div>
