@@ -180,6 +180,7 @@ export default function SnippetClient() {
         <div className="grid grid-cols-1 md:grid-cols-[320px_1fr] gap-4 h-full min-h-0">
             <aside className="flex flex-col border rounded min-h-0">
                 <div className="p-3">
+                    <NewSnippetButton className="w-full mb-3" />
                     <div className="relative">
                         <Input
                             className="pr-20"

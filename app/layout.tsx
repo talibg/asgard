@@ -22,7 +22,6 @@ const firaCode = Fira_Code({
     variable: '--font-mono',
 })
 
-// biome-ignore lint/style/useComponentExportOnlyModules: Next.js requires exporting metadata from layout files
 export const metadata: Metadata = {
     title: 'TypeSnip',
     description: 'a private, local TypeScript snippet manager',

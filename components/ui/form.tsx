@@ -133,6 +133,4 @@ function FormMessage({ className, ...props }: React.ComponentProps<'p'>) {
         </p>
     )
 }
-
-/* biome-ignore lint/style/useComponentExportOnlyModules: export hook alongside components for convenience */
 export { useFormField, Form, FormItem, FormLabel, FormControl, FormDescription, FormMessage, FormField }

@@ -12,6 +12,12 @@ export default function AppFooter() {
                     </a>
                 </span>
                 <div className="flex items-center gap-3">
+                    <Link className="hover:text-foreground underline underline-offset-4" href="/">
+                        Snippets
+                    </Link>
+                    <Link className="hover:text-foreground underline underline-offset-4" href="/blog">
+                        Blog
+                    </Link>
                     <Link className="hover:text-foreground underline underline-offset-4" href="/about">
                         About
                     </Link>

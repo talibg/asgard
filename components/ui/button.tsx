@@ -48,6 +48,4 @@ function Button({
 
     return <Comp className={cn(buttonVariants({ variant, size, className }))} data-slot="button" {...props} />
 }
-
-/* biome-ignore lint/style/useComponentExportOnlyModules: export variants alongside component for convenience */
 export { Button, buttonVariants }

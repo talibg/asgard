@@ -107,6 +107,4 @@ function SelectItem({ className, children, ...props }: React.ComponentProps<type
         </SelectPrimitive.Item>
     )
 }
-
-/* biome-ignore lint/style/useComponentExportOnlyModules: export grouped primitives from a single module */
 export { Select, SelectGroup, SelectValue, SelectTrigger, SelectContent, SelectItem }

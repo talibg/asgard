@@ -32,6 +32,4 @@ function Badge({
 
     return <Comp className={cn(badgeVariants({ variant }), className)} data-slot="badge" {...props} />
 }
-
-/* biome-ignore lint/style/useComponentExportOnlyModules: export variants alongside component for convenience */
 export { Badge, badgeVariants }

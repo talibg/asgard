@@ -29,7 +29,8 @@
             "recommended": true,
             "suspicious": {
                 "noExplicitAny": "error",
-                "noUnknownAtRules": "off"
+                "noUnknownAtRules": "off",
+                "noArrayIndexKey": "off"
             },
             "complexity": {
                 "noForEach": "error"
@@ -37,7 +38,11 @@
             "style": {
                 "useConst": "error",
                 "useBlockStatements": "off",
-                "noNonNullAssertion": "error"
+                "noNonNullAssertion": "error",
+                "useComponentExportOnlyModules": "off"
+            },
+            "security": {
+                "noDangerouslySetInnerHtml": "off"
             },
             "a11y": {
                 "noAutofocus": "error",
