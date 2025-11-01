@@ -12,10 +12,12 @@ export const generateStaticParams = () => getAllPostSlugs().map((slug) => ({ slu
 export const generateMetadata = async ({ params }: Props) => {
     const { slug } = await params
     const { frontmatter } = await getPostBySlug(slug)
+    const url = `https://typesnip.com/blog/${frontmatter.slug}`
     return {
         title: frontmatter.title,
         description: frontmatter.summary,
         keywords: frontmatter.tags,
+        alternates: { canonical: url },
     }
 }
 
