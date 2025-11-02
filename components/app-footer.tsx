@@ -24,6 +24,12 @@ export default function AppFooter() {
                     <Link className="hover:text-foreground underline underline-offset-4" href="/terms">
                         Terms
                     </Link>
+                    <Link className="hover:text-foreground underline underline-offset-4" href="/privacy-policy">
+                        Privacy
+                    </Link>
+                    <Link className="hover:text-foreground underline underline-offset-4" href="/contact">
+                        Contact
+                    </Link>
                     <Link className="hover:text-foreground underline underline-offset-4" href="/settings">
                         Settings
                     </Link>
