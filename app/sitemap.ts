@@ -48,10 +48,28 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             lastModified: newestPostDate ?? fileMtime(path.join(appDir, 'blog', 'page.tsx')),
         },
         {
+            url: `${siteUrl}/contact`,
+            changeFrequency: 'monthly',
+            priority: 0.3,
+            lastModified: fileMtime(path.join(appDir, 'contact', 'page.tsx')),
+        },
+        {
+            url: `${siteUrl}/privacy-policy`,
+            changeFrequency: 'monthly',
+            priority: 0.3,
+            lastModified: fileMtime(path.join(appDir, 'privacy-policy', 'page.tsx')),
+        },
+        {
             url: `${siteUrl}/tags`,
             changeFrequency: 'weekly',
             priority: 0.6,
             lastModified: newestPostDate ?? fileMtime(path.join(appDir, 'tags', 'page.tsx')),
+        },
+        {
+            url: `${siteUrl}/settings`,
+            changeFrequency: 'monthly',
+            priority: 0.3,
+            lastModified: fileMtime(path.join(appDir, 'settings', 'page.tsx')),
         },
         {
             url: `${siteUrl}/terms`,
