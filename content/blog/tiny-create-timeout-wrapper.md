@@ -3,7 +3,7 @@ title: Tiny Create Timeout Wrapper
 slug: tiny-create-timeout-wrapper
 summary: A typed wrapper for setTimeout that exposes cancel and refresh helpers so you can create predictable timers without leaks.
 tags: [typescript, timers, utilities]
-publishedAt: 2025-11-08
+publishedAt: 2025-11-02
 language: ts
 draft: false
 ---

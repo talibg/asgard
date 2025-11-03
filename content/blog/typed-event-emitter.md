@@ -3,7 +3,7 @@ title: Typed Event Emitter
 slug: typed-event-emitter
 summary: A generic EventEmitter that keeps listeners and payloads strongly typed all the way from emitters to subscribers.
 tags: [typescript, events, utilities]
-publishedAt: 2025-11-08
+publishedAt: 2025-11-02
 language: ts
 draft: false
 ---
