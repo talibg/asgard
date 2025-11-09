@@ -1,4 +1,11 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
+
+export const metadata: Metadata = {
+    title: 'Contact TypeSnip',
+    description:
+        'Get in touch with the TypeSnip team for support, feature requests, or business inquiries about our snippet manager.',
+}
 
 export default function ContactPage() {
     return (

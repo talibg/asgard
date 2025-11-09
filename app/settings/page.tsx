@@ -1,5 +1,6 @@
 'use client'
 
+import type { Metadata } from 'next'
 import { useRef } from 'react'
 import { toast } from 'sonner'
 import { z } from 'zod'
@@ -17,6 +18,15 @@ import {
 } from '@/components/ui/alert-dialog'
 import { Button } from '@/components/ui/button'
 import { type Snippet, Snippets } from '@/lib/snippets-store'
+
+export const metadata: Metadata = {
+    title: 'Account Settings',
+    description: 'Manage your TypeSnip user profile and application settings.',
+    robots: {
+        index: false,
+        follow: false,
+    },
+}
 
 export default function SettingsPage() {
     const fileRef = useRef<HTMLInputElement | null>(null)

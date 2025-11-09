@@ -1,4 +1,14 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
+
+export const metadata: Metadata = {
+    title: 'Privacy Policy | TypeSnip',
+    description: 'Our commitment to your privacy. TypeSnip is a local and private TypeScript snippet manager.',
+    robots: {
+        index: false,
+        follow: true,
+    },
+}
 
 export default function PrivacyPolicyPage() {
     return (
@@ -11,8 +21,8 @@ export default function PrivacyPolicyPage() {
             <section className="space-y-2">
                 <h2 className="text-base font-medium">1. Overview</h2>
                 <p className="text-sm text-muted-foreground">
-                    TypeSnip (&quot;we,&quot; &quot;us&quot;) is a browser-based code snippet manager. This policy explains
-                    what information the application handles and how we protect your privacy.
+                    TypeSnip (&quot;we,&quot; &quot;us&quot;) is a browser-based code snippet manager. This policy
+                    explains what information the application handles and how we protect your privacy.
                 </p>
             </section>
 

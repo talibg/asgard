@@ -22,9 +22,29 @@ const firaCode = Fira_Code({
     variable: '--font-mono',
 })
 
+const siteUrl = 'https://typesnip.com'
+const title = 'TypeSnip — The Private, Local TypeScript Snippet Manager'
+const description =
+    'Easily save, manage, and search your private, local TypeScript snippets. TypeSnip is the fast, offline-first snippet manager for developers.'
+
 export const metadata: Metadata = {
-    title: 'TypeSnip',
-    description: 'a private, local TypeScript snippet manager',
+    metadataBase: new URL(siteUrl),
+    title: {
+        template: '%s | TypeSnip',
+        default: title,
+    },
+    description,
+    keywords: [
+        'TypeScript',
+        'TypeScript snippet manager',
+        'TypeScript snippets',
+        'code snippets',
+        'snippet manager',
+        'developer productivity',
+        'TypeScript tools',
+        'local',
+        'private',
+    ],
     icons: {
         icon: [
             { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
@@ -38,6 +58,29 @@ export const metadata: Metadata = {
         ],
     },
     manifest: '/manifest.webmanifest',
+    openGraph: {
+        title,
+        description,
+        url: new URL(siteUrl),
+        siteName: 'TypeSnip',
+        images: [
+            {
+                url: '/opengraph-image.png',
+                width: 1200,
+                height: 630,
+                alt: 'TypeSnip: TypeScript Snippet Manager',
+            },
+        ],
+        locale: 'en_US',
+        type: 'website',
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title,
+        description,
+        images: ['/opengraph-image.png'],
+        creator: '@talibg',
+    },
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {

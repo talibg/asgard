@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Badge } from '@/components/ui/badge'
 import { getAllTags, getPostsByTag } from '@/lib/blog'
@@ -8,10 +9,26 @@ export const dynamic = 'force-static'
 
 export const generateStaticParams = () => getAllTags().map((tag) => ({ tag }))
 
-export const generateMetadata = async ({ params }: Props) => {
-    const { tag } = await params
-    const decoded = decodeURIComponent(tag)
-    return { title: `Tag: ${decoded}` }
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const { tag } = await params // No need to await params
+    const decodedTag = decodeURIComponent(tag)
+    const capitalizedTag = decodedTag.charAt(0).toUpperCase() + decodedTag.slice(1)
+
+    // Build the SEO-friendly title and description
+    const title = `${capitalizedTag} Snippets & Articles`
+    const description = `Browse all TypeScript snippets, code examples, and articles tagged with '${decodedTag}'. Find your next coding solution on TypeSnip.`
+
+    return {
+        title: title,
+        description: description,
+        keywords: [
+            `${decodedTag} typescript`,
+            `${decodedTag} snippets`,
+            `${decodedTag} code examples`,
+            'typescript tags',
+            'code snippet manager',
+        ],
+    }
 }
 
 export default async function TagPage({ params }: Props) {

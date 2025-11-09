@@ -1,4 +1,14 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
+
+export const metadata: Metadata = {
+    title: 'Terms | TypeSnip',
+    description: 'Our commitment to your privacy. TypeSnip is a local and private TypeScript snippet manager.',
+    robots: {
+        index: false,
+        follow: true,
+    },
+}
 
 export default function TermsPage() {
     return (
