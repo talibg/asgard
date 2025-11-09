@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-    title: 'Privacy Policy | TypeSnip',
+    title: 'Privacy Policy',
     description: 'Our commitment to your privacy. TypeSnip is a local and private TypeScript snippet manager.',
     robots: {
         index: false,
